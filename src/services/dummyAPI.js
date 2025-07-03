@@ -1,6 +1,5 @@
 const BASE_URL = 'https://dummyjson.com';
 
-// Obtener todos los productos
 export const getProducts = async () => {
   try {
     const response = await fetch(`${BASE_URL}/products`);

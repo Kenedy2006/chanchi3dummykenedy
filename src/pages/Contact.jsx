@@ -19,11 +19,9 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí normalmente enviarías los datos a un servidor
     console.log('Form submitted:', formData);
     setIsSubmitted(true);
     
-    // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData({

@@ -1,25 +1,16 @@
-import { useState, useEffect } from 'react';
-import { getProducts } from '../services/dummyAPI';
+import { useEffect } from 'react';
+import { useProductStore } from '../store/useProductStore';
 
 const Home = () => {
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { products, loading, fetchProducts } = useProductStore();
 
   useEffect(() => {
-    const loadFeaturedProducts = async () => {
-      try {
-        const products = await getProducts();
-        
-        setFeaturedProducts(products.slice(0, 6));
-      } catch (error) {
-        console.error('Error loading featured products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (products.length === 0) {
+      fetchProducts();
+    }
+  }, [fetchProducts, products.length]);
 
-    loadFeaturedProducts();
-  }, []);
+  const featuredProducts = products.slice(0, 6);
 
   if (loading) {
     return (

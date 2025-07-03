@@ -1,23 +1,7 @@
-import { useState } from 'react';
+import { useProductStore } from '../store/useProductStore';
 
 const CardList = ({ data = [] }) => {
-    const [favorites, setFavorites] = useState([]);
-
-    const toggleFavorite = (productId) => {
-        setFavorites(prev => 
-            prev.includes(productId) 
-                ? prev.filter(id => id !== productId)
-                : [...prev, productId]
-        );
-    };
-
-    if (!data || data.length === 0) {
-        return (
-            <div className="text-center">
-                <p className="lead">No hay productos disponibles</p>
-            </div>
-        );
-    }
+    const { favorites, toggleFavorite } = useProductStore();
 
     return (
         <div className="row">
@@ -41,13 +25,9 @@ const CardList = ({ data = [] }) => {
                                         : product.description
                                     }
                                 </p>
-                                <div className="d-flex justify-content-between align-items-center mb-2">
-                                    <span className="h5 text-primary mb-0">${product.price}</span>
-                                    <small className="text-muted">⭐ {product.rating}</small>
-                                </div>
+                                
                                 <div className="d-flex justify-content-between">
                                     <span className="badge bg-secondary">{product.category}</span>
-                                    
                                 </div>
                             </div>
                         </div>
